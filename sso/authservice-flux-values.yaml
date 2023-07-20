@@ -1,0 +1,8 @@
+application:
+  name: authservice
+  namespace: authservice
+  path: chart
+  repository: https://repo1.dso.mil/big-bang/product/packages/authservice.git
+  tag: 0.5.3-bb.11
+  values: |
+    ###ZARF_VAR_AUTHSERVICE_VALUES###

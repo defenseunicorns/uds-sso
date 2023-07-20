@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: podinfo
+  description: "An example mission app"
+  version: "0.1"
+components:
+  - name: podinfo
+    required: true
+    manifests:
+      - name: podinfo
+        namespace: podinfo
+        kustomizations:
+          - podinfo
+    images:
+      - "ghcr.io/stefanprodan/podinfo:6.3.6"
+    actions:
+      onRemove:
+        after:
+          - cmd: |
+              ./zarf tools kubectl delete namespace podinfo

@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+
+kind: ZarfPackageConfig
+metadata:
+  name: uds-sso
+  description: "UDS AuthService deployed via flux"
+  version: "0.1"
+  architecture: amd64 
+
+variables:
+  - name: REALM
+    default: baby-yoda
+    prompt: false
+  - name: AUTHSERVICE_VALUES
+    default: values-authservice.yaml
+    prompt: false
+    type: file
+    autoIndent: true
+components:
+  - name: pepr-sso
+    required: true
+    actions:
+      onCreate:
+        before:
+          - dir: ../pepr-sso
+            cmd: |
+              npm ci
+              npx pepr build
+            description: Build the pepr module
+    manifests:
+      - name: pepr-sso
+        namespace: pepr-system
+        files:
+          - ../pepr-sso/dist/pepr-module-ee997382-f23b-5ea2-93be-21cf7fe742a3.yaml
+    images:
+      - ghcr.io/defenseunicorns/pepr/controller:v0.12.0
+  - name: istio-extension-provider
+    required: true
+    manifests:
+      - name: istio-extension-provider
+        kustomizations:
+          - ./istio-extension-provider
+    images:
+      - registry1.dso.mil/ironbank/tetrate/istio/proxyv2:1.17.2-tetratefips-v0
+  - name: authservice
+    required: true
+    description: "Deploy authservice via flux"
+    charts:
+      - name: flux-app
+        releaseName: authservice-flux
+        version: 1.0.0
+        url: https://github.com/defenseunicorns/flux-app-helm-chart.git
+        gitPath: charts
+        namespace: bigbang
+        valuesFiles:
+          - authservice-flux-values.yaml
+    repos:
+      - https://repo1.dso.mil/big-bang/product/packages/authservice.git
+    images:
+      - registry1.dso.mil/ironbank/istio-ecosystem/authservice:0.5.3

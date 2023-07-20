@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+
+kind: ZarfPackageConfig
+metadata:
+  name: k3d-dubbd-base
+  description: "Basic DUBBD install with MetalLB"
+  version: "0.1"
+  architecture: amd64 
+
+variables:
+  - name: HOST_PATH
+    default: "/var/local-path-provisioner/*"
+    prompt: false
+
+components:
+  - name: metallb
+    required: true
+    manifests:
+      - name: metallb
+        namespace: metallb-system
+        files:
+          - metallb/metallb-native.yaml
+    images:
+      - quay.io/metallb/speaker:v0.13.9
+      - quay.io/metallb/controller:v0.13.9
+  - name: metallb-config
+    required: true
+    manifests:
+      - name: metallb-config
+        namespace: metallb-system
+        files:
+          - metallb/config.yaml
+  - name: load-certs
+    required: true
+    import:
+      name: load-certs
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd:0.3.0-skeleton
+  - name: preflight
+    required: true
+    import:
+      name: preflight
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd:0.3.0-skeleton
+  - name: download-flux
+    required: true
+    import:
+      name: download-flux
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd:0.3.0-skeleton
+  - name: bigbang
+    required: true
+    import:
+      name: bigbang
+      url: oci://ghcr.io/defenseunicorns/packages/dubbd:0.3.0-skeleton
+    extensions:
+      bigbang:
+        version: "###ZARF_PKG_TMPL_BIGBANG_VERSION###"
+        valuesFiles:
+        - ../values/base-values.yaml
+        - ../values/disable-unrelated.yaml
