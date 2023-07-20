@@ -4,7 +4,9 @@ kind: ZarfPackageConfig
 metadata:
   name: uds-sso
   description: "UDS AuthService deployed via flux"
-  version: "0.1"
+  # x-release-please-start-version
+  version: "0.1.0"
+  # x-release-please-end
   architecture: amd64 
 
 variables:
