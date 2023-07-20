@@ -1,0 +1,34 @@
+{
+  "name": "pepr-sso",
+  "version": "0.0.1",
+  "description": "Pepr module to support UDS-SSO functionality",
+  "keywords": [
+    "pepr",
+    "k8s",
+    "policy-engine",
+    "pepr-module",
+    "security"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "pepr": {
+    "name": "pepr-sso",
+    "uuid": "ee997382-f23b-5ea2-93be-21cf7fe742a3",
+    "onError": "ignore",
+    "alwaysIgnore": {
+      "namespaces": [],
+      "labels": []
+    }
+  },
+  "scripts": {
+    "k3d-setup": "k3d cluster delete pepr-dev && k3d cluster create pepr-dev --k3s-arg '--debug@server:0'"
+  },
+  "dependencies": {
+    "@pepr/keycloak-authsvc": "^0.5.1",
+    "pepr": "0.12.0"
+  },
+  "devDependencies": {
+    "typescript": "5.0.4"
+  }
+}
