@@ -40,7 +40,7 @@ jobs:
         run: zarf init -a amd64 --components=git-server --confirm
 
       - name: Deploy DUBBD on k3d cluster
-        run: zarf package deploy oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.3.0-amd64 --no-progress --confirm
+        run: zarf package deploy oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.5.0-amd64 --set=APPROVED_REGISTRIES="127.0.0.1* | ghcr.io/defenseunicorns/pepr* | registry1.dso.mil" --no-progress --confirm
         timeout-minutes: 60
 
       - name: Deploy keycloak package
