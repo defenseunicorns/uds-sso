@@ -1,0 +1,55 @@
+name: Test UDS SSO
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  test-clean-install:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Fail if Draft PR
+        if: github.event.pull_request.draft == true
+        run: exit 1
+
+      - uses: actions/checkout@v3
+
+      - uses: ./.github/actions/create-zarf-package
+        with:
+          username: ${{ secrets.REGISTRY1_USERNAME }}
+          password: ${{ secrets.REGISTRY1_PASSWORD }}
+          working-dir: sso
+          download-init-package: true
+
+      - name: Create k3d cluster
+        id: create-cluster
+        # renovate: datasource=github-tags depName=defenseunicorns/uds-aws-ci-k3d versioning=semver
+        uses: defenseunicorns/uds-aws-ci-k3d@v0.0.3
+        with:
+          cluster-action: create
+          aws-assume-role: ${{ secrets.AWS_COMMERCIAL_ROLE_TO_ASSUME }}
+          aws-region: us-west-2
+
+      - name: Zarf init
+        run: zarf init -a amd64 --components=git-server --confirm
+
+      - name: Deploy DUBBD on k3d cluster
+        run: zarf package deploy oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.5.0-amd64 --set=APPROVED_REGISTRIES="127.0.0.1* | ghcr.io/defenseunicorns/pepr* | registry1.dso.mil" --no-progress --confirm
+        timeout-minutes: 60
+
+      - name: Deploy keycloak package
+        run: zarf package deploy zarf-package-*.tar.zst  --no-progress --confirm
+        working-directory: sso
+
+      - name: Teardown k3d cluster
+        if: always()
+        # renovate: datasource=github-tags depName=defenseunicorns/uds-aws-ci-k3d versioning=semver
+        uses: defenseunicorns/uds-aws-ci-k3d@v0.0.3
+        with:
+          cluster-action: destroy
