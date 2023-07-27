@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/defenseunicorns/uds-sso/compare/v0.1.1...v0.1.2) (2023-07-26)
+
+
+### Bug Fixes
+
+* add values component ([8725c9f](https://github.com/defenseunicorns/uds-sso/commit/8725c9f94774097976fd49a41cb1b9c97d350967))
+
 ## [0.1.1](https://github.com/defenseunicorns/uds-sso/compare/v0.1.0...v0.1.1) (2023-07-25)
 
 
