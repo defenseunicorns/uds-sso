@@ -57,3 +57,9 @@ components:
       - https://repo1.dso.mil/big-bang/product/packages/authservice.git
     images:
       - registry1.dso.mil/ironbank/istio-ecosystem/authservice:0.5.3
+    actions:
+      onDeploy:
+        after:
+          - cmd: ./zarf tools wait-for HelmRelease authservice ready -n bigbang
+            maxRetries: 3
+            maxTotalSeconds: 300
