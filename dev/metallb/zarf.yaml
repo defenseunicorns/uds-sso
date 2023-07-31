@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/defenseunicorns/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: metallb
+  description: "MetalLB"
+  version: "0.1.0"
+  architecture: amd64 
+components:
+  - name: metallb
+    required: true
+    manifests:
+      - name: metallb
+        namespace: metallb-system
+        files:
+          - metallb-native.yaml
+    images:
+      - quay.io/metallb/controller:v0.13.9
+      - quay.io/metallb/speaker:v0.13.9
+  - name: metallb-config
+    required: true
+    manifests:
+      - name: metallb
+        namespace: metallb-system
+        files:
+          - config.yaml
