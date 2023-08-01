@@ -18,6 +18,10 @@ variables:
     prompt: false
     type: file
     autoIndent: true
+  - name: AUTHSERVICE_DEPENDS_ON
+    default: "[]"
+  - name: AUTHSERVICE_CREATE_NAMESPACE
+    default: "true"
 components:
   - name: pepr-sso
     required: true
@@ -45,11 +49,11 @@ components:
     required: true
     description: "Deploy authservice via flux"
     charts:
+    # renovate: datasource=helm
       - name: flux-app
         releaseName: authservice-flux
-        version: 1.0.0
-        url: https://github.com/defenseunicorns/flux-app-helm-chart.git
-        gitPath: charts
+        version: 1.0.5
+        url: https://defenseunicorns.github.io/uds-support-charts/
         namespace: bigbang
         valuesFiles:
           - authservice-flux-values.yaml
