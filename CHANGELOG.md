@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.3](https://github.com/defenseunicorns/uds-sso/compare/v0.1.2...v0.1.3) (2023-08-03)
+
+
+### Bug Fixes
+
+* ensure authservice is up before deployment completes ([8a009b5](https://github.com/defenseunicorns/uds-sso/commit/8a009b5d0fefaeb6a0cb50662f4724b5d97bf1ab))
+
+
+### Miscellaneous
+
+* add renovate config ([fef6d25](https://github.com/defenseunicorns/uds-sso/commit/fef6d259dff0506927818294cc213635b8cf080e))
+* **deps:** update all dependencies ([24b519b](https://github.com/defenseunicorns/uds-sso/commit/24b519bb4b3345e68c8a6fb55e4b3e1a2f0f4c34))
+* **deps:** update all dependencies to v0.13.10 ([6e5624b](https://github.com/defenseunicorns/uds-sso/commit/6e5624b5556372bca11e86cb70598231e9c3607e))
+* drop typescript update ([b962ed9](https://github.com/defenseunicorns/uds-sso/commit/b962ed988a802a55928cbf32471c76231d8f1f02))
+* move dev things into dev ([4df60da](https://github.com/defenseunicorns/uds-sso/commit/4df60da6ba0cadd0a8e08fc11f7b6700a1bfcbb7))
+* update package lock for pepr-sso ([a89acd6](https://github.com/defenseunicorns/uds-sso/commit/a89acd6b1c8fb4176569fe780ffd93fc87fac727))
+* use updated support chart ([f690b02](https://github.com/defenseunicorns/uds-sso/commit/f690b02eebe411f902183d54e963f3283fe8723d))
+
 ## [0.1.2](https://github.com/defenseunicorns/uds-sso/compare/v0.1.1...v0.1.2) (2023-07-26)
 
 
