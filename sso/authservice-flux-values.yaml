@@ -6,7 +6,7 @@ application:
   repository: https://repo1.dso.mil/big-bang/product/packages/authservice.git
   ref:
     # renovate: datasource=gitlab-tags depName=big-bang/product/packages/authservice versioning=loose registryUrl=https://repo1.dso.mil
-    tag: 0.5.3-bb.9
+    tag: 0.5.3-bb.11
   values: |
     ###ZARF_VAR_AUTHSERVICE_VALUES###
   dependsOn:
