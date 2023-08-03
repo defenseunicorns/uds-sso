@@ -2,7 +2,7 @@
 DUBBD_K3D_VERSION := 0.5.2
 ZARF_VERSION := v0.28.3
 # renovate: datasource=docker depName=ghcr.io/defenseunicorns/uds-capability/uds-idam extractVersion=^(?<version>\d+\.\d+\.\d+)
-IDAM_VERSION := 0.1.5
+IDAM_VERSION := 0.1.6
 ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
 cluster/create:

@@ -13,7 +13,7 @@ components:
         kustomizations:
           - podinfo
     images:
-      - "ghcr.io/stefanprodan/podinfo:6.3.6"
+      - "ghcr.io/stefanprodan/podinfo:6.4.0"
     actions:
       onRemove:
         after:
