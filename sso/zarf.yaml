@@ -22,8 +22,6 @@ variables:
     default: "[]"
   - name: AUTHSERVICE_CREATE_NAMESPACE
     default: "true"
-  - name: AUTHSERVICE_CREATE_NAMESPACE
-    default: "true"
   - name: KEYCLOAK_BASE_DOMAIN
     default: "keycloak.bigbang.dev"
   - name: KEYCLOAK_REALM
