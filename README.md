@@ -11,7 +11,7 @@ Pre-built Zarf Package to support Single Sign On with a [DUBBD](https://github.c
 
 ## Getting Started
 
-- Create a new k3d cluster with the following:
+- The follwoing `make` target will create a new k3d cluster with the following:
   - Initialize Zarf
   - Deploy Metallb - load balancer
   - Deploy DUBBD
@@ -26,15 +26,15 @@ make cluster/full
 
 For further information about UDS-SSO `make` targets view the [Makefile here](Makefile#L12).
 
-#### Example Mission Application Configuration
+### Example Mission Application Configuration
 
 During the `make cluster/full` make target execution there is a [step for deploying](Makefile#L50) and configuring an example mission app to be protected by SSO.
 
 The [test-mission-app](dev/test-mission-app/podinfo/) deploys a podinfo app that has been configured with a [secret](dev/test-mission-app/podinfo/create-client-secret.yaml) that is used to create and configure the client for this app in keycloak. 
 
-#### Creating Client Secret
+### Creating Client Secret
 
-To get start this [kubernetes Command](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/#create-a-secret) created this [secret](dev/test-mission-app/podinfo/create-client-secret.yaml):
+To create a secret for an App use this following [kubernetes Command](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/#create-a-secret) (which created this [secret](dev/test-mission-app/podinfo/create-client-secret.yaml))as an example:
 
 ```bash
 kubectl create secret generic create-client-secret \
@@ -53,10 +53,12 @@ kubectl create secret generic create-client-secret \
 >```yaml
 >pepr.dev/keycloak: createclient
 >```
+>For an example of where this label should go [see here](dev/test-mission-app/podinfo/create-client-secret.yaml#L7).
+>
 >This secret is used by PEPR to know how to configure Keycloak and SSO to protect the mission application.
 
 >[!NOTE]  
->In some environments a `creationTimestamp: null` metadata tag is created and can cause some issues.
+>In some environments a `creationTimestamp: null` metadata tag is created and can cause issues.
 
 ## Zarf Variables Configuration
 
