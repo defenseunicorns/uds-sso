@@ -5,7 +5,7 @@ resources:
   - namespace.yaml
   - vs.yaml
   - create-client-secret.yaml
-  - github.com/stefanprodan/podinfo/kustomize?ref=6.4.0
+  - github.com/stefanprodan/podinfo/kustomize?ref=6.4.1
 patches:
 - target:
     kind: Deployment

@@ -64,7 +64,7 @@ components:
       # renovate: datasource=helm
       - name: flux-app
         url: https://defenseunicorns.github.io/uds-support-charts/
-        version: 1.0.5
+        version: 1.0.7
         releaseName: authservice-flux
         namespace: bigbang
         valuesFiles:
