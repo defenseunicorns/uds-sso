@@ -41,10 +41,10 @@ jobs:
         uses: supplypike/setup-bin@v3
         with:
           # renovate: uds-cli-uri datasource=github-tags depName=defenseunicorns/uds-cli
-          uri: 'https://github.com/defenseunicorns/uds-cli/releases/download/v0.0.4-alpha/uds-cli_v0.0.4-alpha_Linux_amd64 '
+          uri: 'https://github.com/defenseunicorns/uds-cli/releases/download/v0.0.5-alpha/uds-cli_v0.0.5-alpha_Linux_amd64 '
           name: 'uds'
           # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
-          version: 'v0.0.4-alpha'
+          version: 'v0.0.5-alpha'
 
       - name: UDS CLI Bundle Creation
         run: make build/bundle
