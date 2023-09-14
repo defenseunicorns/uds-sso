@@ -1,7 +1,6 @@
 name: Test UDS SSO
 
 on:
-  push:
   pull_request:
     branches: [ "main" ]
 
