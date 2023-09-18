@@ -18,7 +18,7 @@ jobs:
         if: github.event.pull_request.draft == true
         run: exit 1
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: ./.github/actions/create-zarf-package
         with:
@@ -36,16 +36,20 @@ jobs:
           aws-assume-role: ${{ secrets.AWS_COMMERCIAL_ROLE_TO_ASSUME }}
           aws-region: us-west-2
 
-      - name: Zarf init
-        run: zarf init -a amd64 --components=git-server --confirm
+      - name: Install uds-cli
+        uses: supplypike/setup-bin@v3
+        with:
+          # renovate: uds-cli-uri datasource=github-tags depName=defenseunicorns/uds-cli
+          uri: 'https://github.com/defenseunicorns/uds-cli/releases/download/v0.0.5-alpha/uds-cli_v0.0.5-alpha_Linux_amd64 '
+          name: 'uds'
+          # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
+          version: 'v0.0.5-alpha'
 
-      - name: Deploy DUBBD on k3d cluster
-        run: zarf package deploy oci://ghcr.io/defenseunicorns/packages/dubbd-k3d:0.5.0-amd64 --set=APPROVED_REGISTRIES="127.0.0.1* | ghcr.io/defenseunicorns/pepr* | registry1.dso.mil" --no-progress --confirm
-        timeout-minutes: 60
+      - name: UDS CLI Bundle Creation
+        run: make build/bundle
 
-      - name: Deploy keycloak package
-        run: zarf package deploy zarf-package-*.tar.zst  --no-progress --confirm
-        working-directory: sso
+      - name: CLI Bundle Deployment
+        run: make deploy/bundle
 
       - name: Teardown k3d cluster
         if: always()
