@@ -1,4 +1,4 @@
-name: Test UDS SSO
+name: Test UDS SSO Upgrade 
 
 on:
   pull_request:
