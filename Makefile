@@ -7,7 +7,10 @@ ZARF_VERSION := v0.29.2
 METALLB_VERSION := 0.0.1
 
 # renovate: datasource=docker depName=ghcr.io/defenseunicorns/uds-capability/uds-idam extractVersion=^(?<version>\d+\.\d+\.\d+)
-IDAM_VERSION := 0.1.9
+IDAM_VERSION := 0.1.11
+# x-release-please-start-version
+SSO_VERSION := 0.1.3
+# x-release-please-end
 ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
 cluster/create:
@@ -34,3 +37,27 @@ deploy/sso: ## Deploy only the sso zarf package
 
 deploy/bundle: ## Deploy the SSO uds bundle
 	cd dev && uds bundle deploy uds-bundle-uds-sso-amd64-*.tar.zst --confirm
+
+
+# Build all CI Test requirements (SSO from source, uds bundle with zarf / metallb / dubbd / idam)
+build/all-ci: build build/sso build/ci-test-setup
+
+# Build the CI upgrade test setup bundle (zarf / metallb / dubbd / idam)
+build/ci-test-setup: | build
+	cd test/ci-upgrade-sso && uds bundle create --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION) --set IDAM_VERSION=$(IDAM_VERSION) --confirm
+
+# Deploy the CI upgrade test bundle
+deploy/ci-test-setup:
+	cd test/ci-upgrade-sso && uds bundle deploy uds-bundle-uds-sso-*.tar.zst --confirm
+
+# Deploy the latest published sso image
+deploy/published-sso:
+	zarf package deploy oci://ghcr.io/defenseunicorns/uds-capability/uds-sso:$(SSO_VERSION)-amd64 --confirm
+	
+# Deploy sso branch from source
+deploy/source-sso:	
+	zarf package deploy build/zarf-package-uds-sso*.tar.zst --confirm
+
+# Remove the latest published sso image
+remove/published-sso:
+	zarf package remove oci://ghcr.io/defenseunicorns/uds-capability/uds-sso:$(SSO_VERSION)-amd64 --confirm

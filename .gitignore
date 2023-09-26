@@ -1,3 +1,15 @@
 .vscode
 build
 run
+tmp
+zarf-sbom
+on_failure.sh
+uds-bundle-*.tar.zst
+/ca.pem
+bigbang.dev.cert
+bigbang.dev.key
+truststore.jks.b64
+customreg.yaml
+realm.json
+values-keycloak.yaml
+values-authservice.yaml
