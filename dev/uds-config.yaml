@@ -7,3 +7,6 @@ bundle:
       metallb:
         set:
           IP_ADDRESS_POOL: 172.28.0.8/29
+      uds-idam:
+        set:
+          KEYCLOAK_DEV_DB_ENABLED: true
