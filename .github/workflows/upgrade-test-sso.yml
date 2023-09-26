@@ -1,7 +1,6 @@
 name: Test UDS SSO
 
 on:
-  push:
   pull_request:
     branches: [ "main" ]
 
@@ -47,7 +46,7 @@ jobs:
           version: 'v0.0.5-alpha'
 
       # Build Env Setup Bundle (Metallb, DUBBD, POSTGRES)
-      - name: IdAM CI Build Test Setup Bundle
+      - name: SSO CI Build Test Setup Bundle
         run: make build/all-ci
 
       # Deploy SSO Test Setup Bundle 
