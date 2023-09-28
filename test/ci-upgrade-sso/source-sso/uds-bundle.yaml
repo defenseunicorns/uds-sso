@@ -2,8 +2,8 @@
 
 kind: UDSBundle
 metadata:
-  name: uds-sso-upgrade-published
-  description: uds sso upgrade published bundle
+  name: uds-sso-upgrade-source
+  description: uds sso upgrade source bundle
   version: 0.0.1
 
 zarf-packages:
@@ -31,5 +31,5 @@ zarf-packages:
 
   # UDS SSO
   - name: uds-sso
-    repository: ghcr.io/defenseunicorns/uds-capability/uds-sso
-    ref: "###BNDL_TMPL_SSO_VERSION###"
+    path: ../../../build
+    ref: 0.1.3

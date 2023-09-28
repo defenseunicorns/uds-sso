@@ -1,0 +1,12 @@
+bundle:
+  deploy:
+    zarf-packages:
+      dubbd-k3d:
+        set:
+          APPROVED_REGISTRIES: "127.0.0.1* | ghcr.io/defenseunicorns/pepr* | registry1.dso.mil"
+      metallb:
+        set:
+          IP_ADDRESS_POOL: 172.28.0.8/29
+      uds-idam:
+        set:
+          KEYCLOAK_DEV_DB_ENABLED: true

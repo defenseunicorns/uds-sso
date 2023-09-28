@@ -43,24 +43,42 @@ deploy/bundle: ## Deploy the SSO uds bundle
 
 
 # Build all CI Test requirements (SSO from source, uds bundle with zarf / metallb / dubbd / idam)
-build/all-ci: build build/sso build/ci-test-setup
+build/all-ci: build build/sso build/ci-upgrade-sso-published build/ci-upgrade-sso-source
 
 # Build the CI upgrade test setup bundle (zarf / metallb / dubbd / idam)
-build/ci-test-setup: | build
-	cd test/ci-upgrade-sso && uds bundle create --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION) --set IDAM_VERSION=$(IDAM_VERSION) --confirm
+build/ci-upgrade-sso-published: | build
+	cd test/ci-upgrade-sso && uds bundle create --set SSO_VERSION=$(SSO_VERSION) --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION) --set IDAM_VERSION=$(IDAM_VERSION) --confirm
 
-# Deploy the CI upgrade test bundle
-deploy/ci-test-setup:
+# Build the CI upgrade test for source SSO image
+build/ci-upgrade-sso-source: | build
+	cd test/ci-upgrade-sso/source-sso && uds bundle create --set INIT_VERSION=$(ZARF_VERSION) --set METALLB_VERSION=$(METALLB_VERSION) --set DUBBD_VERSION=$(DUBBD_K3D_VERSION) --set IDAM_VERSION=$(IDAM_VERSION) --confirm
+
+# Deploy the CI upgrade test for published SSO image
+deploy/ci-upgrade-sso-published:
 	cd test/ci-upgrade-sso && uds bundle deploy uds-bundle-uds-sso-*.tar.zst --confirm
 
-# Deploy the latest published sso image
-deploy/published-sso:
-	zarf package deploy oci://ghcr.io/defenseunicorns/uds-capability/uds-sso:$(SSO_VERSION)-amd64 --confirm
-	
-# Deploy sso branch from source
-deploy/source-sso:	
-	zarf package deploy build/zarf-package-uds-sso*.tar.zst --confirm
+# Deploy the CI upgrade test for source SSO image
+deploy/ci-upgrade-sso-source:
+	cd test/ci-upgrade-sso/source-sso && uds bundle deploy uds-bundle-uds-sso-*.tar.zst --confirm
 
-# Remove the latest published sso image
-remove/published-sso:
-	zarf package remove oci://ghcr.io/defenseunicorns/uds-capability/uds-sso:$(SSO_VERSION)-amd64 --confirm
+
+
+
+# # Deploy the CI upgrade test bundle
+# deploy/ci-test-setup:
+# 	cd test/ci-upgrade-sso && uds bundle deploy uds-bundle-uds-sso-*.tar.zst --confirm
+
+# # Deploy the latest published sso image
+# deploy/published-sso:
+# 	zarf package deploy oci://ghcr.io/defenseunicorns/uds-capability/uds-sso:$(SSO_VERSION)-amd64 --confirm
+	
+# # Deploy sso branch from source
+# deploy/source-sso:	
+# 	zarf package deploy build/zarf-package-uds-sso*.tar.zst --confirm
+
+# # Remove the latest published sso image
+# remove/published-sso:
+# 	zarf package remove oci://ghcr.io/defenseunicorns/uds-capability/uds-sso:$(SSO_VERSION)-amd64 --confirm
+
+cleanup:
+	rm -rf build run tmp on_failure.sh bigbang.dev.cert bigbang.dev.key values-authservice.yaml customreg.yaml realm.json truststore.jks.b64 values-keycloak.yaml test/ci-upgrade-idam/run test/ci-upgrade-idam/tmp test/ci-upgrade-idam/bigbang.dev.cert test/ci-upgrade-idam/bigbang.dev.key test/ci-upgrade-idam/customreg.yaml test/ci-upgrade-idam/on_failure.sh test/ci-upgrade-idam/realm.json test/ci-upgrade-idam/truststore.jks.b64 test/ci-upgrade-idam/uds-bundle-uds-idam* test/ci-upgrade-idam/values-keycloak.yaml test/ci-upgrade-idam/source-idam/uds-bundle-uds-idam* test/ci-upgrade-idam/source-idam/run test/ci-upgrade-idam/source-idam/tmp test/ci-upgrade-idam/source-idam/bigbang.dev.cert test/ci-upgrade-idam/source-idam/bigbang.dev.key test/ci-upgrade-idam/source-idam/customreg.yaml test/ci-upgrade-idam/source-idam/on_failure.sh test/ci-upgrade-idam/source-idam/realm.json test/ci-upgrade-idam/source-idam/truststore.jks.b64 test/ci-upgrade-idam/source-idam/values-keycloak.yaml

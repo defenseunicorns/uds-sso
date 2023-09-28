@@ -5,7 +5,7 @@ tmp
 zarf-sbom
 on_failure.sh
 uds-bundle-*.tar.zst
-/ca.pem
+ca.pem
 bigbang.dev.cert
 bigbang.dev.key
 truststore.jks.b64

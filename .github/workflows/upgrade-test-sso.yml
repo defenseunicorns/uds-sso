@@ -45,25 +45,39 @@ jobs:
           # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
           version: 'v0.0.5-alpha'
 
-      # Build Env Setup Bundle (Metallb, DUBBD, POSTGRES)
-      - name: SSO CI Build Test Setup Bundle
+      # Build Env Setup Bundle (Zarf, Metallb, Dubbd, IDAM, Source SSO, Published SSO)
+      - name: Build CI Upgrade Test for Published SSO
         run: make build/all-ci
 
       # Deploy SSO Test Setup Bundle 
-      - name: SSO CI Deploy Test Setup Bundle
-        run: make deploy/ci-test-setup
+      - name: Deploy CI Upgrade Test Published SSO
+        run: make deploy/ci-upgrade-sso-published
 
       # Deploy Latest Published SSO 
-      - name: Deploy Latest Published SSO
-        run: make deploy/published-sso
+      - name: Deploy CI Upgrade Test Source SSO
+        run: make deploy/ci-upgrade-sso-source
 
-      # Remove latest published version of SSO for Deploying SSO from source
-      - name: Remove Published SSO Deployment
-        run: make remove/published-sso
 
-      # Deploy new SSO changes from source
-      - name: Install New SSO Changes from source
-        run: make deploy/source-sso
+
+      # # Build Env Setup Bundle (Metallb, DUBBD, POSTGRES)
+      # - name: SSO CI Build Test Setup Bundle
+      #   run: make build/all-ci
+
+      # # Deploy SSO Test Setup Bundle 
+      # - name: SSO CI Deploy Test Setup Bundle
+      #   run: make deploy/ci-test-setup
+
+      # # Deploy Latest Published SSO 
+      # - name: Deploy Latest Published SSO
+      #   run: make deploy/published-sso
+
+      # # Remove latest published version of SSO for Deploying SSO from source
+      # - name: Remove Published SSO Deployment
+      #   run: make remove/published-sso
+
+      # # Deploy new SSO changes from source
+      # - name: Install New SSO Changes from source
+      #   run: make deploy/source-sso
 
       - name: Teardown k3d cluster
         if: always()
