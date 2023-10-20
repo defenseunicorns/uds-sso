@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/defenseunicorns/uds-sso/compare/v0.1.4...v0.1.5) (2023-10-20)
+
+
+### Miscellaneous
+
+* remove old values ([#30](https://github.com/defenseunicorns/uds-sso/issues/30)) ([c3773a8](https://github.com/defenseunicorns/uds-sso/commit/c3773a8ecf1a19de12eef118c0acb2dd9d73e001))
+
 ## [0.1.4](https://github.com/defenseunicorns/uds-sso/compare/v0.1.3...v0.1.4) (2023-09-18)
 
 
