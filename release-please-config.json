@@ -11,7 +11,8 @@
       ],
       "versioning": "always-bump-patch",
       "extra-files": [
-        "sso/zarf.yaml"
+        "sso/zarf.yaml",
+        "Makefile"
       ]
     }
   }
