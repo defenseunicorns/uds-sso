@@ -68,7 +68,8 @@ components:
         valuesFiles:
           - authservice-flux-values.yaml
     repos:
-      - https://repo1.dso.mil/big-bang/product/packages/authservice.git
+      # renovate: datasource=gitlab-tags depName=big-bang/product/packages/authservice versioning=loose registryUrl=https://repo1.dso.mil
+      - https://repo1.dso.mil/big-bang/product/packages/authservice.git@0.5.3-bb.15
     images:
       - registry1.dso.mil/ironbank/istio-ecosystem/authservice:0.5.3
     actions:

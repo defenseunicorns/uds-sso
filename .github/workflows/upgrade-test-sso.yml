@@ -47,15 +47,18 @@ jobs:
 
       # Build Env Setup Bundle (Zarf, Metallb, Dubbd, IDAM, Source SSO, Published SSO)
       - name: Build CI Upgrade Test for Published SSO
-        run: make build/all-ci
+        run: make build/published
 
       # Deploy SSO Test Setup Bundle 
       - name: Deploy CI Upgrade Test Published SSO
-        run: make deploy/ci-upgrade-sso-published
+        run: make deploy/bundle
+
+      - name: Build bundle with source SSO
+        run: make build/all
 
       # Deploy Latest Published SSO 
       - name: Deploy CI Upgrade Test Source SSO
-        run: make deploy/ci-upgrade-sso-source
+        run: make deploy/bundle
 
       - name: Teardown k3d cluster
         if: always()
