@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.5](https://github.com/defenseunicorns/uds-sso/compare/v0.1.4...v0.1.5) (2023-10-20)
+
+
+### Miscellaneous
+
+* remove old values ([#30](https://github.com/defenseunicorns/uds-sso/issues/30)) ([c3773a8](https://github.com/defenseunicorns/uds-sso/commit/c3773a8ecf1a19de12eef118c0acb2dd9d73e001))
+
+## [0.1.4](https://github.com/defenseunicorns/uds-sso/compare/v0.1.3...v0.1.4) (2023-09-18)
+
+
+### Bug Fixes
+
+* parameterize realm and keycloak url ([36824de](https://github.com/defenseunicorns/uds-sso/commit/36824de9322642c62aa974e641d172eedaa15c0b))
+
+
+### Miscellaneous
+
+* fix key ordering for renovate ([52b7f13](https://github.com/defenseunicorns/uds-sso/commit/52b7f13bdf515ac276ea3e2e9bc996d37edfc808))
+
 ## [0.1.3](https://github.com/defenseunicorns/uds-sso/compare/v0.1.2...v0.1.3) (2023-08-03)
 
 

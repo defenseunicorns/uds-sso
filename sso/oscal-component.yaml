@@ -1,0 +1,137 @@
+component-definition:
+  uuid: ef6dd44f-0eca-4c9d-8b2a-120fec456852
+  metadata:
+    title: Authservice Component
+    last-modified: "2023-10-20T20:25:06Z"
+    version: "20231020"
+    oscal-version: 1.1.1
+    parties:
+      - uuid: f3cf70f8-ba44-4e55-9ea3-389ef24847d3
+        type: organization
+        name: Defense Unicorns
+        links:
+          - href: https://defenseunicorns.com
+            rel: website
+  components:
+    - uuid: 4ac855b5-8fa6-4ef3-9f42-c5695c455dc1
+      type: software
+      title: Authservice
+      description: |
+        An implementation of Envoy External Authorization focused on handling AuthN/AuthZ 
+        for Istio and Kubernetes that adheres to FedRAMP High Baseline.
+      purpose: Provides authn/authz capabilities to applications via Istio Service Mesh
+      responsible-roles:
+        - role-id: provider
+          party-uuids:
+            - f3cf70f8-ba44-4e55-9ea3-389ef24847d3
+      control-implementations:
+        - uuid: ace2d94d-adb5-44d1-84f7-61cde335f919
+          source: https://raw.githubusercontent.com/GSA/fedramp-automation/master/dist/content/rev5/baselines/json/FedRAMP_rev5_HIGH-baseline-resolved-profile_catalog.json
+          description: Controls implemented by authservice to meet the FedRAMP High Baseline.
+          implemented-requirements:
+            - uuid: b20b8050-8cca-4284-8c54-0045fe03e4f7
+              control-id: ac-2.1
+              description: >-
+                Authservice allows the use of an external identity OIDC provider for application login
+                by configuring filter chain matching for hostname (headers) for applications. This control can then
+                be inherited by the Identity Provider.
+            - uuid: 58f3f3cb-f3a3-4c07-b128-58085301eb95
+              control-id: ac-8
+              description: >-
+                Authservice has a standard DOD login banner see https://login.dso.mil
+            - uuid: b74a0149-3e0e-43d2-a870-002151601126
+              control-id: ac-17.3
+              description: >-
+                Authservice remote access traffic is routed through secure Istio network.
+            - uuid: 66e85180-094a-471a-817f-863898dd061f
+              control-id: au-2
+              description: >-
+                Authservice logs HTTP method (GET, POST, etc) Timestamp of request, destinations, response codes, and identity.
+            - uuid: 8be1a08b-8d87-4105-95b4-990d8797538f
+              control-id: au-3
+              description: >-
+                Authservice logs HTTP method (GET, POST, etc) Timestamp of request, destinations, response codes, and identity.
+            - uuid: 61da4077-4856-4e27-b82d-37c70b2b19ff
+              control-id: au-3.1
+              description: >-
+                Authservice logs HTTP method (GET, POST, etc) Timestamp of request, destinations, response codes, and identity.
+            - uuid: a8ef73ff-b8be-42e5-b850-558605ad12cc
+              control-id: ia-2
+              description: >-
+                Authservice maps user sessions to user identities in an IdP.
+            - uuid: 5f13939a-e4e4-4bf1-a278-fc4d109f0b45
+              control-id: ia-2.1
+              description: >-
+                Allows the use of an external identity OIDC provider for application login by configuring filter chain 
+                matching hostname for application. The IdP can enforce multi-factor authentication for the client used 
+                by authservice. This control can then be inherited from the IdP.
+            - uuid: 6d6729b5-4875-4f73-92aa-f4dbfe2ff331
+              control-id: ia-2.2
+              description: >-
+                Allows the use of an external identity OIDC provider for application login by configuring filter chain 
+                matching hostname for application. The IdP can enforce multi-factor authentication for the client used 
+                by authservice. This control can then be inherited from the IdP.
+            - uuid: 7841d436-bf8e-4ab1-bf2d-efc9505374b6
+              control-id: ia-2.6
+              description: >-
+                Allows the use of an external identity OIDC provider for application login by configuring filter chain 
+                matching hostname for application. The IdP can enforce multi-factor authentication for the client used 
+                by authservice. This control can then be inherited from the IdP.
+            - uuid: 93cce3ab-3579-4b38-8548-edb4cec25850
+              control-id: ia-2.8
+              description: >-
+                Allows the use of an external identity OIDC provider for application login by configuring filter chain matching hostname for application. The IdP and OIDC 
+                protocol use "nonce" and "state" fields for replay resistance. This control can then be inherited from the IdP.
+            - uuid: 19292248-d3ce-4ae0-82af-3b1afd8be3bd
+              control-id: ia-2.12
+              description: >-
+                Allows the use of an external identity OIDC provider for application login by configuring filter chain matching hostname for application. The IdP and OIDC 
+                protocol use "nonce" and "state" fields for replay resistance. This control can then be inherited from the IdP.
+            - uuid: 14362044-2ff6-4a8a-9041-e1e4b0295b6e
+              control-id: ia-3
+              description: >-
+                Allows the use of an external identity OIDC provider for application login by configuring filter chain matching hostname for application. 
+                The IdP can be configured to uniquely identify and authenticate devices before establishing connections. This control can then be inherited 
+                from the IdP.
+            - uuid: 31cfa869-f442-4221-92ce-0198ff834cc0
+              control-id: ia-4
+              description: >-
+                Authservice retrieves JWT identifiers from the IdP which include various "claims" including the username of individuals, and a 
+                list of "groups" (roles) the user has access to. This control can then be inherited from the IdP.
+            - uuid: d6365446-5980-40f7-a4be-a3da7ae0b2ec
+              control-id: ia-11
+              description: >-
+                Allows the use of an external identity OIDC provider for application login by configuring filter chain matching hostname for application.
+
+                By restricting the lifetime of the JWT, Authservice will reauthenticate the user when it expires. The IdP can then implement concurrent 
+                session control, enforced during re-authentication. This control can then be inherited from the IdP.
+    - uuid: 37488718-938a-43d2-91ff-79193e44a67a
+      type: software
+      title: Authservice
+      description: |
+        An implementation of Envoy External Authorization focused on handling AuthN/AuthZ 
+        for Istio and Kubernetes that adheres to DoD IL6
+      purpose: Provides authn/authz capabilities to applications via Istio Service Mesh
+      responsible-roles:
+        - role-id: provider
+          party-uuids:
+            - f3cf70f8-ba44-4e55-9ea3-389ef24847d3
+      control-implementations:
+        - uuid: cfc79240-b793-4623-8d7d-9d01ea5f9c10
+          source: https://raw.githubusercontent.com/usnistgov/oscal-content/master/nist.gov/SP800-53/rev5/json/NIST_SP-800-53_rev5_catalog.json
+          description: Controls implemented by authservice to meet NIST 800-53 controls related to DoD IL6.
+          implemented-requirements:
+            - uuid: 2f619c68-3363-4a74-b903-5124ad769723
+              control-id: sc-23.5
+              description: >-
+                Authservice only allows SSO connections from trusted certificate authorities to establish secure sessions.
+  back-matter:
+    resources:
+      - uuid: 02b2a143-e63a-45f1-83e8-d38202af73ff
+        title: Github Repo - Authservice
+        rlinks:
+          - href: https://github.com/istio-ecosystem/authservice
+      - uuid: dab6f046-305d-46f2-a821-84b0cb80d80a
+        title: UDS SSO
+        rlinks:
+          - href: https://github.com/defenseunicorns/uds-sso

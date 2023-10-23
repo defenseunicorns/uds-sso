@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish Zarf Package
-        run: zarf package publish zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/uds-capability
+        run: zarf package publish ../build/zarf-package-*.tar.zst oci://ghcr.io/defenseunicorns/uds-capability
         working-directory: ${{ inputs.working_dir }}
         timeout-minutes: 60
 
