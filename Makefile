@@ -12,7 +12,6 @@ IDAM_VERSION := 0.1.12
 
 # x-release-please-start-version
 SSO_VERSION := 0.1.5
-
 # x-release-please-end
 
 ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
