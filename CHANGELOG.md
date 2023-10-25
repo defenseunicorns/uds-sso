@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/defenseunicorns/uds-sso/compare/v0.1.5...v0.1.6) (2023-10-25)
+
+
+### Bug Fixes
+
+* include specific git ref ([0d6b12c](https://github.com/defenseunicorns/uds-sso/commit/0d6b12c0cf8c3a4af362f3bbc661893d1c45d104))
+
 ## [0.1.5](https://github.com/defenseunicorns/uds-sso/compare/v0.1.4...v0.1.5) (2023-10-20)
 
 
