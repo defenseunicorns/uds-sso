@@ -1,4 +1,4 @@
-name: Test UDS SSO
+name: Test UDS SSO Upgrade 
 
 on:
   pull_request:
@@ -55,10 +55,19 @@ jobs:
           # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
           version: 'v0.0.5-alpha'
 
-      - name: UDS CLI Bundle Creation
-        run: make build/bundle
+      # Build Env Setup Bundle (Zarf, Metallb, Dubbd, IDAM, Source SSO, Published SSO)
+      - name: Build CI Upgrade Test for Published SSO
+        run: make build/published
 
-      - name: CLI Bundle Deployment
+      # Deploy SSO Test Setup Bundle 
+      - name: Deploy CI Upgrade Test Published SSO
+        run: make deploy/bundle
+
+      - name: Build bundle with source SSO
+        run: make build/all
+
+      # Deploy Latest Published SSO 
+      - name: Deploy CI Upgrade Test Source SSO
         run: make deploy/bundle
 
       - name: Teardown k3d cluster

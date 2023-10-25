@@ -1,0 +1,47 @@
+grafana:
+  values:
+    grafana.ini:
+      auth.generic_oauth:
+        enabled: true
+        name: IDAM
+        client_id: dev_00eb8904-5b88-4c68-ad67-cec0d2e07aa6_grafana
+        client_secret: secret
+        scopes: openid Grafana
+        auth_url: https://keycloak.bigbang.dev/auth/realms/baby-yoda/protocol/openid-connect/auth
+        token_url: https://keycloak.bigbang.dev/auth/realms/baby-yoda/protocol/openid-connect/token
+        api_url: https://keycloak.bigbang.dev/auth/realms/baby-yoda/protocol/openid-connect/userinfo
+        role_attribute_path: Viewer
+neuvector:
+  values:
+    controller:
+      secret:
+        data:
+          oidcinitcfg.yaml:
+            always_reload: true
+            enable: true
+            issuer: https://keycloak.bigbang.dev/auth/realms/baby-yoda
+            client_id: dev_00eb8904-5b88-4c68-ad67-cec0d2e07aa6_neuvector
+            client_secret: "**********"
+            default_role: admin
+kiali:
+  values:
+    cr:
+      spec:
+        auth:
+          strategy: openid
+          openid:
+            client_id: dev_00eb8904-5b88-4c68-ad67-cec0d2e07aa6_kiali
+            disable_rbac: true
+            issuer_uri: https://keycloak.bigbang.dev/auth/realms/baby-yoda
+            scopes:
+              - openid
+              - email
+            username_claim: email
+
+# This is included to workaround https://repo1.dso.mil/big-bang/product/packages/monitoring/-/issues/118
+monitoring:
+  enabled: true
+
+  values:
+    networkPolicies:
+      enabled: false
