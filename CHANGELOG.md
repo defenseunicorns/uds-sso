@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.7](https://github.com/defenseunicorns/uds-sso/compare/v0.1.6...v0.1.7) (2023-10-31)
+
+
+### Bug Fixes
+
+* issue with override values not being used ([a680ad2](https://github.com/defenseunicorns/uds-sso/commit/a680ad2fea780eb82e837807092b34199ac5e6d6))
+
 ## [0.1.6](https://github.com/defenseunicorns/uds-sso/compare/v0.1.5...v0.1.6) (2023-10-25)
 
 
