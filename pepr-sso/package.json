@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@pepr/keycloak-authsvc": "^0.5.1",
-    "pepr": "0.12.1"
+    "pepr": "0.14.2"
   },
   "devDependencies": {
     "typescript": "5.0.4"
