@@ -53,7 +53,7 @@ jobs:
           uri: 'https://github.com/defenseunicorns/uds-cli/releases/download/v0.0.5-alpha/uds-cli_v0.0.5-alpha_Linux_amd64 '
           name: 'uds'
           # renovate: datasource=github-tags depName=defenseunicorns/uds-cli versioning=semver
-          version: 'v0.0.5-alpha'
+          version: 'v0.10.1'
 
       # Build Env Setup Bundle (Zarf, Metallb, Dubbd, IDAM, Source SSO, Published SSO)
       - name: Build CI Upgrade Test for Published SSO

@@ -47,7 +47,7 @@ components:
         files:
           - ../pepr-sso/dist/pepr-module-ee997382-f23b-5ea2-93be-21cf7fe742a3.yaml
     images:
-      - ghcr.io/defenseunicorns/pepr/controller:v0.12.1
+      - ghcr.io/defenseunicorns/pepr/controller:v20.0.0
   - name: authservice-values
     required: true
     files:
@@ -62,7 +62,7 @@ components:
       # renovate: datasource=helm
       - name: flux-app
         url: https://defenseunicorns.github.io/uds-support-charts/
-        version: 1.0.5
+        version: 1.0.7
         releaseName: authservice-flux
         namespace: bigbang
         valuesFiles:
@@ -71,7 +71,7 @@ components:
       # renovate: datasource=gitlab-tags depName=big-bang/product/packages/authservice versioning=loose registryUrl=https://repo1.dso.mil
       - https://repo1.dso.mil/big-bang/product/packages/authservice.git@0.5.3-bb.15
     images:
-      - registry1.dso.mil/ironbank/istio-ecosystem/authservice:0.5.3
+      - registry1.dso.mil/ironbank/istio-ecosystem/authservice:1.0.0
     actions:
       onDeploy:
         after:

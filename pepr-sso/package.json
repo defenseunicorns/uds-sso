@@ -25,8 +25,8 @@
     "k3d-setup": "k3d cluster delete pepr-dev && k3d cluster create pepr-dev --k3s-arg '--debug@server:0'"
   },
   "dependencies": {
-    "@pepr/keycloak-authsvc": "^0.5.1",
-    "pepr": "0.12.1"
+    "@pepr/keycloak-authsvc": "^0.6.0",
+    "pepr": "0.28.6"
   },
   "devDependencies": {
     "typescript": "5.0.4"
